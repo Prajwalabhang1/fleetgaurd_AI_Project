@@ -110,4 +110,3 @@ zipp==3.19.2
 
 python-dotenv==1.0.0
 gunicorn==21.2.0
-mysqlclient==2.2.0
