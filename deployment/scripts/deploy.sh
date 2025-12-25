@@ -17,13 +17,13 @@ echo "VPS: 72.61.238.154 | Ports: 8888, 8443"
 echo "================================================"
 
 # Auto-configure if .env doesn't exist
-if [ ! -f "Fleetguard-NewAPI-2025-main/.env" ]; then
+if [ ! -f ".env" ]; then
     echo -e "${GREEN}[AUTO-CONFIG] Generating configuration automatically...${NC}"
     bash deployment/scripts/auto-configure.sh
 fi
 
 # Verify .env file exists
-if [ ! -f "Fleetguard-NewAPI-2025-main/.env" ]; then
+if [ ! -f ".env" ]; then
     echo -e "${RED}ERROR: Configuration failed!${NC}"
     echo "Please run: bash deployment/scripts/auto-configure.sh"
     exit 1

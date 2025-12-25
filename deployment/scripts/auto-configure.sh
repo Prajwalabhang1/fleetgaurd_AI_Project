@@ -17,7 +17,7 @@ SECRET_KEY=$(openssl rand -base64 50 | tr -d '\n')
 
 # Create .env file
 echo "[2/2] Creating .env configuration file..."
-cat > Fleetguard-NewAPI-2025-main/.env << EOF
+cat > .env << EOF
 # Production Environment Configuration for VPS: 72.61.238.154
 # Auto-generated on $(date)
 # No manual changes needed!
