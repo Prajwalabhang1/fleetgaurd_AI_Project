@@ -33,7 +33,7 @@ COPY requirements.txt .
 # Install Python dependencies
 # Install large ML packages first for better caching
 RUN pip install --no-cache-dir torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cpu && \
-    pip install --no-cache-dir paddlepaddle==2.6.1 && \
+    pip install --no-cache-dir paddlepaddle==2.6.2 && \
     pip install --no-cache-dir ultralytics==8.2.63 && \
     pip install --no-cache-dir -r requirements.txt
 
