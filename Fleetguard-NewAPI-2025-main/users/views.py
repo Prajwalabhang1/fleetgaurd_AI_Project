@@ -41,7 +41,7 @@ def send_password_expiry_reminder():
         send_mail(
             'Password ExpiryWarning',
             'You have not yet changed your Fleetguard 2D-CAD Compare Login Password ,which will expire on ',
-            'chordzconnect@gmail.com',
+            settings.EMAIL_HOST_USER,
             [user.email],
             fail_silently=False,
 
@@ -86,7 +86,7 @@ def send_otp_email(user, recipient_email):
     send_mail(
         subject,
         '',
-        'chordzconnect@gmail.com',
+        settings.EMAIL_HOST_USER,
         [recipient_email],
         fail_silently=False,
         html_message=body  # HTML formatted message

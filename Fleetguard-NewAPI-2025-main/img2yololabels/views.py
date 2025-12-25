@@ -13,7 +13,9 @@ from django.views import View
 from urllib.parse import unquote
 from urllib.parse import quote
 # Initialize the YOLO model
-model = YOLO(r'../best.pt')
+# Initialize the YOLO model
+model_path = os.path.join(settings.BASE_DIR, 'best.pt')
+model = YOLO(model_path)
 
 MEDIA_ROOT = settings.MEDIA_ROOT
 MEDIA_URL = settings.MEDIA_URL
