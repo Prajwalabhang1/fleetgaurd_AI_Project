@@ -13,14 +13,19 @@ NC='\033[0m'
 
 echo "================================================"
 echo "Fleetguard Deployment Script"
+echo "VPS: 72.61.238.154 | Ports: 8888, 8443"
 echo "================================================"
 
-# Check if .env file exists
+# Auto-configure if .env doesn't exist
 if [ ! -f "Fleetguard-NewAPI-2025-main/.env" ]; then
-    echo -e "${RED}ERROR: .env file not found!${NC}"
-    echo "Please copy .env.example to .env and configure it:"
-    echo "  cp Fleetguard-NewAPI-2025-main/.env.example Fleetguard-NewAPI-2025-main/.env"
-    echo "  vim Fleetguard-NewAPI-2025-main/.env"
+    echo -e "${GREEN}[AUTO-CONFIG] Generating configuration automatically...${NC}"
+    bash deployment/scripts/auto-configure.sh
+fi
+
+# Verify .env file exists
+if [ ! -f "Fleetguard-NewAPI-2025-main/.env" ]; then
+    echo -e "${RED}ERROR: Configuration failed!${NC}"
+    echo "Please run: bash deployment/scripts/auto-configure.sh"
     exit 1
 fi
 
@@ -77,21 +82,21 @@ echo "Running Health Checks:"
 echo "================================================"
 
 # Check backend
-if curl -f http://localhost:8000/admin/ > /dev/null 2>&1; then
+if curl -f http://localhost:8081/admin/ > /dev/null 2>&1; then
     echo -e "${GREEN}✓ Backend is running${NC}"
 else
     echo -e "${RED}✗ Backend check failed${NC}"
 fi
 
 # Check frontend
-if curl -f http://localhost:4200/ > /dev/null 2>&1; then
+if curl -f http://localhost:8082/ > /dev/null 2>&1; then
     echo -e "${GREEN}✓ Frontend is running${NC}"
 else
     echo -e "${RED}✗ Frontend check failed${NC}"
 fi
 
 # Check nginx
-if curl -f http://localhost/health > /dev/null 2>&1; then
+if curl -f http://localhost:8888/health > /dev/null 2>&1; then
     echo -e "${GREEN}✓ Nginx is running${NC}"
 else
     echo -e "${RED}✗ Nginx check failed${NC}"
@@ -103,9 +108,9 @@ echo -e "${GREEN}Deployment Complete!${NC}"
 echo "================================================"
 echo ""
 echo "Application URLs:"
-echo "  - Frontend: http://localhost or http://your-server-ip"
-echo "  - Backend API: http://localhost/api/"
-echo "  - Admin Panel: http://localhost/admin/"
+echo "  - Frontend: http://72.61.238.154:8888 or http://localhost:8888"
+echo "  - Backend API: http://72.61.238.154:8081/api/"
+echo "  - Admin Panel: http://72.61.238.154:8888/admin/"
 echo ""
 echo "Useful commands:"
 echo "  - View logs: docker-compose logs -f [service-name]"

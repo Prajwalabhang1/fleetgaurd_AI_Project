@@ -74,8 +74,8 @@ ufw --force enable
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow ssh
-ufw allow 80/tcp   # HTTP
-ufw allow 443/tcp  # HTTPS
+ufw allow 8888/tcp   # HTTP (Nginx main port)
+ufw allow 8443/tcp   # HTTPS
 ufw status
 
 # Optimize system for ML workloads

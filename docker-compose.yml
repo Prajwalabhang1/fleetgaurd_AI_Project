@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./deployment/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "3306:3306"
+      - "3307:3306" # External port 3307 to avoid conflicts
     networks:
       - fleetguard_network
     healthcheck:
@@ -33,7 +33,7 @@ services:
     volumes:
       - redis_data:/data
     ports:
-      - "6379:6379"
+      - "6380:6379" # External port 6380 to avoid conflicts
     networks:
       - fleetguard_network
     healthcheck:
@@ -57,7 +57,7 @@ services:
       - media_volume:/app/media
       - ./logs/backend:/app/logs
     ports:
-      - "8000:8000"
+      - "8081:8000" # External port 8081 to avoid conflicts
     depends_on:
       db:
         condition: service_healthy
@@ -130,7 +130,7 @@ services:
     container_name: fleetguard_frontend
     restart: unless-stopped
     ports:
-      - "4200:80"
+      - "8082:80" # External port 8082 to avoid conflicts
     depends_on:
       - backend
     networks:
@@ -154,8 +154,8 @@ services:
       - ./deployment/certbot/www:/var/www/certbot:ro
       - ./deployment/certbot/conf:/etc/letsencrypt:ro
     ports:
-      - "80:80"
-      - "443:443"
+      - "8888:80" # External port 8888 (main access point)
+      - "8443:443" # External port 8443 for HTTPS
     depends_on:
       - backend
       - frontend
