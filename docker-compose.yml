@@ -50,7 +50,7 @@ services:
     container_name: fleetguard_backend
     restart: unless-stopped
     env_file:
-      - ./Fleetguard-NewAPI-2025-main/.env
+      - ./.env
     volumes:
       - ./Fleetguard-NewAPI-2025-main:/app
       - static_volume:/app/static
@@ -82,7 +82,7 @@ services:
     restart: unless-stopped
     command: celery -A fleetguard_api worker --loglevel=info --concurrency=2
     env_file:
-      - ./Fleetguard-NewAPI-2025-main/.env
+      - ./.env
     volumes:
       - ./Fleetguard-NewAPI-2025-main:/app
       - media_volume:/app/media
@@ -107,7 +107,7 @@ services:
     restart: unless-stopped
     command: celery -A fleetguard_api beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
     env_file:
-      - ./Fleetguard-NewAPI-2025-main/.env
+      - ./.env
     volumes:
       - ./Fleetguard-NewAPI-2025-main:/app
       - ./logs/celery-beat:/app/logs
