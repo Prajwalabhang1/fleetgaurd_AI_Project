@@ -26,7 +26,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx-frontend.conf /etc/nginx/conf.d/
 
 # Copy built application from builder stage
-COPY --from=builder /app/dist/fleet-guard /usr/share/nginx/html
+COPY --from=builder /app/dist/FleetGuard /usr/share/nginx/html
 
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
