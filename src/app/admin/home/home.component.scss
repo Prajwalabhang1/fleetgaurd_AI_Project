@@ -1,0 +1,112 @@
+mat-sidenav {
+    // background: rgb(2,0,36);
+    // background: linear-gradient(118deg, rgba(2,0,36,1) 0%, rgba(1,36,6,1) 18%, rgba(8,167,98,1) 100%);
+    background: rgb(31, 32, 31);
+    width: 230px;
+    height: 100%;
+}
+
+mat-sidenav-content {
+    height: 100vh;
+
+    // background-color: cadetblue;
+
+    .main {
+        margin-left: 30px;
+    }
+}
+
+mat-toolbar {
+
+    mat-icon {
+        // margin-left: 15px;
+        color: gray;
+    }
+
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+
+    .box {
+        margin-top: 15px;
+    }
+}
+
+.user-menu {
+    min-width: 250px;
+}
+
+.premium-user-card {
+    padding: 16px;
+    background: linear-gradient(135deg, #2a2a72 0%, #009ffd 74%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.avatar-icon {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+}
+
+.user-details {
+    text-align: center;
+}
+
+.user-details h2 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.user-role {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-bottom: 16px;
+}
+
+.user-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.user-info-item mat-icon {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+@media (max-width: 600px) {
+    .user-menu {
+        min-width: 200px;
+    }
+
+    .premium-user-card {
+        padding: 12px;
+    }
+
+    .avatar-icon {
+        font-size: 48px;
+        height: 48px;
+        width: 48px;
+    }
+
+    .user-details h2 {
+        font-size: 1.2em;
+    }
+
+    .user-role {
+        font-size: 0.8em;
+    }
+
+    .user-info-item {
+        font-size: 0.9em;
+    }
+}

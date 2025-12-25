@@ -1,0 +1,76 @@
+mat-card {
+    margin-top: 20px;
+    justify-content: center;
+    background-color: rgb(238, 238, 238);
+    width: 20%;
+}
+
+mat-card-title {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+}
+
+mat-form-field {
+    padding-top: 15px;
+
+}
+
+.btn {
+    background: #F47216;
+    padding: 8px 30px 8px 30px;
+    color: white;
+}
+
+.main-div {
+    margin-right: 4%;
+}
+
+i {
+    padding-right: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-elevation-z8 {
+    width: 100%;
+    overflow-x: auto;
+}
+
+@media only screen and (max-width: 800px) {
+    .mat-elevation-z8 {
+        width: 95%;
+        height: 40%;
+    }
+
+    mat-card {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .mat-elevation-z8 {
+        width: 98%;
+        height: 45%;
+    }
+
+    mat-card {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .mat-elevation-z8 {
+        width: 90%;
+        height: 90%;
+    }
+
+    mat-card {
+        width: 50%;
+    }
+}

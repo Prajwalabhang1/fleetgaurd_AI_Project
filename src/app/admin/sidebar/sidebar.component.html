@@ -1,0 +1,51 @@
+<div class="navbar">
+  <div class="user mx-auto">
+    <div class="d-flex justify-content-between align-items-center">
+      <img src="../../../assets/Images/fleetguard_Logo.jpg" alt="Fleetguard" style="height: 50px; width: 100px" />
+      <img src="../../../assets/Images/Filtrum_Logo.jpg" alt="Filtrum" style="height: 50px; width: 100px" />
+    </div>
+  </div>
+  <ng-container *ngIf="Admin">
+    <div class="menu">
+      <div class="menu-head text-center">
+        <span class="text-center">Admin</span>
+      </div>
+      <div class="menu-item pt-5">
+        <button mat-button class="menu-button" [routerLinkActive]="['active']" [routerLink]="['dashboard']">
+          <mat-icon>dashboard</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-button class="menu-button" [routerLinkActive]="['active']" [routerLink]="['add-admin']">
+          <mat-icon>peoples</mat-icon>
+          <span>Add Admin</span>
+        </button>
+        <button mat-button class="menu-button" [routerLinkActive]="['active']" [routerLink]="['all-users']">
+          <mat-icon>peoples</mat-icon>
+          <span>Users</span>
+        </button>
+        <button mat-button class="menu-button" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="User">
+    <div class="menu">
+      <div class="menu-head text-center">
+        <span class="text-center">User</span>
+      </div>
+      <div class="menu-item pt-5">
+        <button mat-button class="menu-button" [routerLinkActive]="['active']" [routerLink]="['dashboard']">
+          <mat-icon>dashboard</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-button class="menu-button" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

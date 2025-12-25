@@ -1,0 +1,342 @@
+<!-- <!-- <body>
+  <div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-around center"
+  >
+    <mat-card class="login-card">
+      <mat-card-title>
+        <img src="assets/Images/images.png" />
+      </mat-card-title>
+      <mat-card-content>
+        <form class="example-form" (submit)="login($event)">
+          <mat-form-field class="example-full-width">
+            <mat-label><i class="fa fa-user"></i>&nbsp; Email</mat-label>
+            <input
+              matInput
+              type="email"
+              id="email"
+              [(ngModel)]="email"
+              name="email"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label><i class="fa fa-lock"></i>&nbsp; Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              required
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="togglePasswordVisibility()"
+              type="button"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <div class="mx-auto text-center my-3">
+            <table>
+              <tr>
+                <td><label>Select Profile:</label></td>
+                <td class="checkbox-group ps-2 pt-1">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="admin"
+                      [(ngModel)]="role"
+                      name="role"
+                      value="admin"
+                      required
+                    />
+                    <label class="form-check-label" for="admin">Admin</label>
+                  </div>
+                </td>
+                <td class="checkbox-group ps-2 pt-1">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="user"
+                      [(ngModel)]="role"
+                      name="role"
+                      value="user"
+                      required
+                    />
+                    <label class="form-check-label" for="user">User</label>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div
+            fxLayout="row wrap"
+            fxLayout.xs="column"
+            fxLayoutAlign="space-around center"
+            fxLayoutGap="25px"
+          >
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              class="mt-3 mb-4"
+            >
+              Login
+            </button>
+          </div>
+          <a href="#" (click)="openForgotPasswordModal($event)"
+            >Forgot password?</a
+          >
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</body> 
+
+<div class="container-fluid">
+  <div class="row vh-100">
+    <!-- Left side with Ascent branding 
+    <div class="col-md-6 d-none d-md-block p-0 bg-dark position-relative overflow-hidden">
+      <div class="h-100 d-flex flex-column justify-content-center p-5">
+        <h2 class="text-white mb-4 display-4 fw-bold">2D-CAD Compare S/W</h2>
+        <p class="text-white fs-5">Powered by Chordz Technologies.</p>
+        <!-- Add stylized paper plane SVG or image here 
+      </div>
+      <div class="position-absolute top-0 start-0 w-100 h-100" style="
+          background: url('../../../assets/Images/bg_image2.jpg') no-repeat
+            center center / cover;
+          opacity: 0.2;
+        "></div>
+    </div>
+
+    <!-- Right side with login form 
+    <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
+      <mat-card class="login-card shadow-lg" style="width: 100%; max-width: 400px; border-radius: 15px">
+        <mat-card-content class="p-1">
+          <div class="d-flex justify-content-between align-items-center">
+            <img src="../../../assets/Images/fleetguard_Logo.jpg" alt="Fleetguard" style="height: 90px" />
+            <img src="../../../assets/Images/Filtrum_Logo.jpg" alt="Filtrum" style="height: 90px" />
+          </div>
+
+          <h5 class="text-center text-primary fw-bold">
+            FLEETGUARD FILTERS PRIVATE LIMITED
+          </h5>
+          <p class="text-center text-muted">Welcome to</p>
+          <h4 class="text-center fw-bold">2D-CAD Compare Software</h4>
+
+          <form class="example-form" (submit)="login($event)">
+            <mat-form-field appearance="outline" class="w-100 mb-2">
+              <mat-label><i class="fa fa-user"></i>&nbsp; Email</mat-label>
+              <input matInput type="email" id="email" [(ngModel)]="email" name="email" required />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100 mb-2">
+              <mat-label><i class="fa fa-lock"></i>&nbsp; Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" id="password" [(ngModel)]="password" name="password"
+                required />
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <!-- <div class="mx-auto text-center">
+              <table>
+                <tr>
+                  <td><label>Select Profile:</label></td>
+                  <td class="checkbox-group ps-2 pt-1">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="admin"
+                        [(ngModel)]="role"
+                        name="role"
+                        value="admin"
+                        required
+                      />
+                      <label class="form-check-label" for="admin">Admin</label>
+                    </div>
+                  </td>
+                  <td class="checkbox-group ps-2 pt-1">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="user"
+                        [(ngModel)]="role"
+                        name="role"
+                        value="user"
+                        required
+                      />
+                      <label class="form-check-label" for="user">User</label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div> 
+
+            <button type="submit" mat-flat-button color="primary" class="w-100 py-2 mb-4" style="border-radius: 25px">
+              Sign in
+            </button>
+
+            <div class="text-center">
+              <a href="#" (click)="openForgotPasswordModal($event)" class="text-decoration-none">Change Password</a>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<footer class="position-fixed bottom-0 start-0 p-3 text-muted small">
+  <a href="https://chordztechnologies.com" target="_blank" rel="noopener noreferrer"
+    class="text-decoration-none text-light">Copyright © 2024 Chordz Technologies Pvt Ltd. All Rights Reserved.</a>
+</footer> -->
+
+<div class="container-fluid login-wrapper">
+  <div class="row vh-100">
+    <!-- Left side with Ascent branding -->
+    <div class="col-md-6 d-none d-md-block p-0 bg-dark position-relative overflow-hidden">
+      <div class="h-100 d-flex flex-column justify-content-center p-5">
+        <h2 class="text-white mb-4 display-4 fw-bold">2D-CAD Compare S/W</h2>
+        <p class="text-white fs-5">Powered by Chordz Technologies.</p>
+      </div>
+      <div class="position-absolute top-0 start-0 w-100 h-100" style="
+          background: url('../../../assets/Images/bg_image2.jpg') no-repeat
+            center center / cover;
+          opacity: 0.2;
+        "></div>
+    </div>
+
+    <!-- Right side with login form -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
+      <div class="login-card-container" [class.flipped]="isFlipped">
+        <div class="login-card-inner">
+          <!-- Login Mode Toggle -->
+          <div class="login-mode-toggle">
+            <div class="toggle-switch" [class.user-active]="!isFlipped" [class.admin-active]="isFlipped"
+              (click)="toggleLoginMode()">
+              <div class="toggle-slider">
+                <span class="user-label" [class.active]="!isFlipped">User</span>
+                <span class="admin-label" [class.active]="isFlipped">Admin</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Login Side -->
+          <mat-card class="login-card user-login" [class.active]="!isFlipped">
+            <mat-card-content class="p-1">
+              <div class="d-flex justify-content-between align-items-center">
+                <img src="../../../assets/Images/fleetguard_Logo.jpg" alt="Fleetguard" style="height: 90px" />
+                <img src="../../../assets/Images/Filtrum_Logo.jpg" alt="Filtrum" style="height: 90px" />
+              </div>
+
+              <h6 class="text-center text-primary fw-bold">
+                FLEETGUARD FILTERS PRIVATE LIMITED
+              </h6>
+              <h4 class="text-center text-muted">User Login Portal</h4>
+
+              <form class="example-form" (submit)="userLogin($event)">
+                <mat-form-field appearance="outline" class="w-100 mb-2">
+                  <mat-label>
+                    <i class="fa fa-user"></i>&nbsp; User Email
+                  </mat-label>
+                  <input matInput type="email" id="email" [(ngModel)]="email" name="email" required
+                    placeholder="Enter your email" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100 mb-2">
+                  <mat-label>
+                    <i class="fa fa-lock"></i>&nbsp; User Password
+                  </mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" id="password" [(ngModel)]="password"
+                    name="password" required placeholder="Enter your password" />
+                  <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                    <mat-icon>
+                      {{ hide ? "visibility_off" : "visibility" }}
+                    </mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <button type="submit" mat-flat-button color="primary" class="w-100 py-2 mb-4"
+                  style="border-radius: 25px">
+                  User Sign In
+                </button>
+
+                <div class="login-links">
+                  <a href="#" (click)="openForgotPasswordModal($event)" class="text-decoration-none">Change Password</a>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Admin Login Side -->
+          <mat-card class="login-card admin-login" [class.active]="isFlipped">
+            <mat-card-content class="p-1">
+              <div class="d-flex justify-content-between align-items-center">
+                <img src="../../../assets/Images/fleetguard_Logo.jpg" alt="Fleetguard" style="height: 90px" />
+                <img src="../../../assets/Images/Filtrum_Logo.jpg" alt="Filtrum" style="height: 90px" />
+              </div>
+
+              <h6 class="text-center text-primary fw-bold">
+                FLEETGUARD FILTERS PRIVATE LIMITED
+              </h6>
+              <h4 class="text-center text-muted">Admin Login Portal</h4>
+
+              <form class="example-form" (submit)="adminLogin($event)">
+                <mat-form-field appearance="outline" class="w-100 mb-2">
+                  <mat-label>
+                    <i class="fa fa-user"></i>&nbsp; Admin Email
+                  </mat-label>
+                  <input matInput type="email" id="admin-email" [(ngModel)]="email" name="email" required
+                    placeholder="Enter admin email" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="w-100 mb-2">
+                  <mat-label>
+                    <i class="fa fa-lock"></i>&nbsp; Admin Password
+                  </mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" id="admin-password" [(ngModel)]="password"
+                    name="password" required placeholder="Enter admin password" />
+                  <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                    <mat-icon>
+                      {{ hide ? "visibility_off" : "visibility" }}
+                    </mat-icon>
+                  </button>
+                </mat-form-field>
+
+                <button type="submit" mat-flat-button color="primary" class="w-100 py-2 mb-4"
+                  style="border-radius: 25px">
+                  Admin Sign In
+                </button>
+
+                <div class="login-links">
+                  <a href="#" (click)="openForgotPasswordModal($event)" class="text-decoration-none">
+                    Change Password
+                  </a>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="position-fixed bottom-0 start-0 p-3 text-muted small">
+  <a href="https://chordztechnologies.com" target="_blank" rel="noopener noreferrer"
+    class="text-decoration-none text-light">Copyright © 2024 Chordz Technologies Pvt Ltd. All Rights Reserved.</a>
+</footer>

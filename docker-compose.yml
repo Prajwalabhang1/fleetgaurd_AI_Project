@@ -1,0 +1,182 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: fleetguard_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-fleetguard_db}
+      MYSQL_USER: ${DB_USER:-fleetguard_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-fleetguard_pass}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./deployment/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+    networks:
+      - fleetguard_network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: fleetguard_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - fleetguard_network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Django Backend
+  backend:
+    build:
+      context: ./Fleetguard-NewAPI-2025-main
+      dockerfile: Dockerfile
+    container_name: fleetguard_backend
+    restart: unless-stopped
+    env_file:
+      - ./Fleetguard-NewAPI-2025-main/.env
+    volumes:
+      - ./Fleetguard-NewAPI-2025-main:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+      - ./logs/backend:/app/logs
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - fleetguard_network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # Celery Worker
+  celery-worker:
+    build:
+      context: ./Fleetguard-NewAPI-2025-main
+      dockerfile: Dockerfile
+    container_name: fleetguard_celery_worker
+    restart: unless-stopped
+    command: celery -A fleetguard_api worker --loglevel=info --concurrency=2
+    env_file:
+      - ./Fleetguard-NewAPI-2025-main/.env
+    volumes:
+      - ./Fleetguard-NewAPI-2025-main:/app
+      - media_volume:/app/media
+      - ./logs/celery:/app/logs
+    depends_on:
+      - backend
+      - redis
+    networks:
+      - fleetguard_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2G
+
+  # Celery Beat Scheduler
+  celery-beat:
+    build:
+      context: ./Fleetguard-NewAPI-2025-main
+      dockerfile: Dockerfile
+    container_name: fleetguard_celery_beat
+    restart: unless-stopped
+    command: celery -A fleetguard_api beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file:
+      - ./Fleetguard-NewAPI-2025-main/.env
+    volumes:
+      - ./Fleetguard-NewAPI-2025-main:/app
+      - ./logs/celery-beat:/app/logs
+    depends_on:
+      - backend
+      - redis
+    networks:
+      - fleetguard_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 512M
+
+  # Angular Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fleetguard_frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - fleetguard_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: fleetguard_nginx
+    restart: unless-stopped
+    volumes:
+      - ./deployment/nginx-main.conf:/etc/nginx/conf.d/fleetguard.conf:ro
+      - ./deployment/nginx-locations.conf:/etc/nginx/conf.d/fleetguard-locations.conf:ro
+      - static_volume:/app/static:ro
+      - media_volume:/app/media:ro
+      - ./deployment/certbot/www:/var/www/certbot:ro
+      - ./deployment/certbot/conf:/etc/letsencrypt:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - fleetguard_network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  static_volume:
+    driver: local
+  media_volume:
+    driver: local
+
+networks:
+  fleetguard_network:
+    driver: bridge

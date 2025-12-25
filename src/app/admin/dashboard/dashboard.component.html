@@ -1,0 +1,141 @@
+<div class="container text-center pt-5 pb-5">
+  <form [formGroup]="convertImagesForm">
+    <div class="row pb-5">
+      <div class="col-lg-6 col-md-4 col-sm-12">
+        <h2>Fleetguard Image/PDF</h2>
+        <input type="file" class="form-control" id="fileUploadFleetguard" name="fileUploadFleetguard"
+          accept="image/*,application/pdf" (change)="onFileSelected($event, 'fleetguard')" />
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-12">
+        <h2>Customer Image/PDF</h2>
+        <input type="file" class="form-control" id="fileUploadCustomer" name="fileUploadCustomer"
+          accept="image/*,application/pdf" (change)="onFileSelected($event, 'customer')" />
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-12 text-center pt-5">
+        <button mat-raised-button color="primary" (click)="postFleetguardData()">Convert PDF To Image</button>
+      </div>
+      <div class="col-lg-6 col-md-4 col-sm-12 text-center pt-5">
+        <button mat-raised-button color="primary" (click)="postCustomerData()">Convert PDF To Image</button>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div *ngIf="fleetguardImages.length > 0" class="col-lg-6 col-md-6 col-sm-12 text-center">
+        <div *ngFor="let image of fleetguardImages; let i = index">
+          <input type="checkbox" class="mycheckbox" [id]="'fleetguardImage' + i"
+            (change)="selectImage(image, 'FFPL', $event)">
+          Please Select Image <br>
+          <label [for]="'fleetguardImage' + i">
+            <a *ngIf="image" [href]="image" target="_blank"><img [src]="image" alt="Converted Fleetguard Image"
+                class="img-fluid pb-3 pt-3" [style.transform]="'rotate('+rotationDegree1+'deg)'"></a>
+          </label>
+        </div>
+      </div>
+      <div *ngIf="customerImages.length > 0" class="col-lg-6 col-md-6 col-sm-12 text-center">
+        <div *ngFor="let image of customerImages; let i = index">
+          <input type="checkbox" class="mycheckbox" [id]="'customerImage' + i"
+            (change)="selectImage(image, 'CUST', $event)">
+          Please Select Image <br>
+          <label [for]="'customerImage' + i">
+            <a *ngIf="image" [href]="image" target="_blank"><img [src]="image" alt="Converted Customer Image"
+                class="img-fluid pb-3 pt-3" [style.transform]="'rotate('+rotationDegree2+'deg)'" /></a>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-4 col-sm-12 text-center pt-5">
+      <button mat-raised-button color="primary" (click)="labelImage('FFPL')">Labelled Image</button>
+      <div *ngIf="labeledImagePathsFFPL.length > 0" class="pt-3">
+        <div *ngFor="let imagePath of labeledImagePathsFFPL">
+          <a *ngIf="imagePath" [href]="imagePath" target="_blank"><img [src]="imagePath" alt="Labelled Fleetguard Image"
+              class="img-fluid pb-3" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-12 text-center pt-5">
+      <button mat-raised-button color="primary" (click)="labelImage('CUST')">Labelled Image</button>
+      <div *ngIf="labeledImagePathsCUST.length > 0" class="pt-3">
+        <div *ngFor="let imagePath of labeledImagePathsCUST">
+          <a *ngIf="imagePath" [href]="imagePath" target="_blank"><img [src]="imagePath" alt="Labelled Customer Image"
+              class="img-fluid pb-3" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-3">
+    <div class="col-lg-12 text-center">
+      <button mat-raised-button color="primary" (click)="generateExcelSheet()">Generate Excel Sheet</button>
+      <div *ngIf="excelSheetUrl" class="pt-3">
+        <a *ngIf="excelSheetUrl" [href]="excelSheetUrl" target="_blank">Download Excelsheet</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="row text-center pb-5">
+    <div class="col-lg-11 col-md-4 col-sm-12">
+      <button mat-raised-button color="primary">Convert To Image</button>
+    </div>
+  </div> -->
+
+<!-- <div class="row text-center pb-5">
+    <div class="col-lg-5 col-md-4 col-sm-12">
+      <div class="image-container">
+        <img src="./assets/Images/image.jpeg" [style.transform]="'rotate('+rotationDegree1+'deg)'"
+          alt="Rotatable Image">
+      </div>
+      <button (click)="rotateImage1()">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+    <div class="col-lg-1 col-md-4 col-sm-12"></div>
+    <div class="col-lg-5 col-md-4 col-sm-12">
+      <div class="image-container">
+        <img src="./assets/Images/image.jpeg" [style.transform]="'rotate('+rotationDegree2+'deg)'"
+          alt="Rotatable Image">
+      </div>
+      <button (click)="rotateImage2()">
+        <i class="fas fa-redo-alt"></i>
+      </button>
+    </div>
+  </div> -->
+
+<!-- <div class="row text-center pb-5">
+    <div class="col-lg-11 col-md-4 col-sm-12">
+      <button mat-raised-button color="primary">Labelled Image</button>
+    </div>
+  </div> -->
+
+<!-- <div class="row text-center pb-5">
+    <div class="col-lg-5 col-md-4 col-sm-12">
+      <div class="image-container">
+        <img src="./assets/Images/image.jpeg" alt="Rotatable Image">
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-4 col-sm-12"></div>
+    <div class="col-lg-5 col-md-4 col-sm-12">
+      <div class="image-container">
+        <img src="./assets/Images/image.jpeg" alt="Rotatable Image">
+      </div>
+    </div>
+  </div>
+  <div class="row text-center pb-5">
+    <div class="col-lg-11 col-md-4 col-sm-12">
+      <button mat-raised-button color="primary">Generate Spreadsheet</button>
+    </div>
+  </div>
+</div> -->
+
+<!-- <button (click)="rotateImage2()">
+          <i class="fas fa-redo-alt"></i>
+        </button> -->

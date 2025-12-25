@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+mat-icon {
+    color: white;
+    font-family: "Material Icons";
+    vertical-align: middle;
+    text-align: center;
+}
+
+.user {
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 20px;
+
+    img {
+        margin-top: 16px;
+        width: 120px;
+        height: 100px;
+    }
+
+    .name {
+        color: white;
+    }
+
+    .mail {
+        margin-top: -16px;
+        color: #8997ac;
+    }
+}
+
+.menu-head {
+    color: #adb4cc;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+
+.menu-item {
+    margin: 0 10px 0 10px;
+
+    .menu-button {
+        display: block;
+        width: 130%;
+        position: relative;
+        display: flex;
+        padding-left: 10px;
+        margin-bottom: 10px;
+        justify-content: flex-start;
+    }
+
+    .menu-button span {
+        margin-left: 20px;
+        color: white;
+    }
+
+    .menu-button:hover {
+        background-color: #003f10;
+
+    }
+
+    .menu-button:focus {
+        background-color: #04661c;
+    }
+}
+
+.active {
+    background-color: #04661c;
+}
