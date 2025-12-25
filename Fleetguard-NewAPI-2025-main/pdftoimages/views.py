@@ -37,8 +37,10 @@ class PDFToJPEGView(APIView):
             # Get the base name of the PDF file without the extension
             base_name = os.path.splitext(file.name)[0]
 
-            poppler_path = r"C://Users//roshn//PycharmProjects//NewFleetguard//Fleetguard-API//poppler-24.02.0//Library//bin"
+            # poppler_path = r"C://Users//roshn//PycharmProjects//NewFleetguard//Fleetguard-API//poppler-24.02.0//Library//bin"
             # poppler_path = r'/usr/bin/'
+            # Use system path (poppler-utils installed in Docker)
+            poppler_path = None
             output_folder = os.path.join(settings.MEDIA_ROOT, 'converted_images')
 
             if not os.path.exists(output_folder):

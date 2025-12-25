@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libgomp1 \
     libmariadb-dev \
     pkg-config \
+    poppler-utils \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
